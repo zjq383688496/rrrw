@@ -1,0 +1,12 @@
+# 参考 https://help.github.com/ignore-files/
+
+# 依赖包
+/node_modules
+
+# 生产环境
+/dist
+
+# 杂项
+.DS_Store
+npm-debug.log*
+
