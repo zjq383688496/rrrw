@@ -26,6 +26,7 @@ module.exports = {
 	alias: {
 		'img':          `${SRC}/assets`,
 		'layout':       `${SRC}/views/layout`,
+		'global':       `${SRC}/views/global`,
 		'store':        `${SRC}/store`,
 		'components':   `${SRC}/components`,
 		// actions:     `${SRC}/actions`,

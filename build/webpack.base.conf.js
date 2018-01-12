@@ -35,8 +35,8 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				exclude: /node_modules/,
-				loader: 'style-loader?sourceMap=true!css-loader?sourceMap=true',
+				// exclude: /node_modules/,
+				loader: 'style-loader!css-loader!postcss-loader',
 			},
 			{
 				test: /\.(jpe?g|png|gif)$/,
@@ -44,6 +44,10 @@ module.exports = {
 				// loader: 'url-loader?name=/img/[name].[hash:5].[ext]',
 				loader: 'file-loader?name=img/[name].[hash:5].[ext]',
 			},
+			{
+				test: /\.(woff2?|eot|ttf|otf|svg)$/,
+				loader: 'file-loader?name=fonts/[name].[hash:5].[ext]'
+			}
 		]
 	},
 	plugins: [

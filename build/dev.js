@@ -18,12 +18,14 @@ module.exports = merge(webpackBaseConf, {
 		new OpenBrowserPlugin({
 			url: `http://localhost:${PORT}`,
 		}),
+		// 开启HMR
+		new webpack.HotModuleReplacementPlugin(),
 	],
 	devtool: 'source-map',
 	devServer: {
 		contentBase: '../src/',
 		historyApiFallback: true,
-		// hot: false,
+		hot: true,
 		// host: '0.0.0.0',
 		port: PORT,
 		stats: { colors: true }

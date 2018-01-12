@@ -1,7 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
-import { updateLocation } from './location'
 
 export default (initialState = {}) => {
 	// ======================================================
@@ -10,15 +9,15 @@ export default (initialState = {}) => {
 	const middleware = [thunk]
 
 	// ======================================================
-	// 状态增强
+	// store增强
 	// ======================================================
-	// const enhancers = []
-	// if (__DEV__) {
-	// 	const devToolsExtension = window.devToolsExtension
-	// 	if (typeof devToolsExtension === 'function') {
-	// 		enhancers.push(devToolsExtension())
-	// 	}
-	// }
+	const enhancers = []
+	if (__DEV__) {
+		const devToolsExtension = window.devToolsExtension
+		if (typeof devToolsExtension === 'function') {
+			enhancers.push(devToolsExtension())
+		}
+	}
 
 	// ======================================================
 	// 状态实例化 & HMR 设置
@@ -28,10 +27,10 @@ export default (initialState = {}) => {
 		initialState,
 		compose(
 			applyMiddleware(...middleware),
-			// ...enhancers
+			...enhancers
 		)
 	)
-	// store.asyncReducers = {}
+	store.asyncReducers = {}
 
 	// if (module.hot) {
 	// 	module.hot.accept('./reducers', () => {
