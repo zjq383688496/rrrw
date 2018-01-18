@@ -1,22 +1,32 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Mainlayout from 'layout/main'
+import { LoginSub } from 'Actions/Login'
 import './index.scss'
 
-					// <h4>Hello Jimmy!</h4>
-					// <img className='duck' src={require('./assets/Duck.jpg')} />
-
 class Input extends Component{
-	getInitialState() {
-	　　return {}
+	constructor(props) {
+		super(props)
+		this.props.valChange.bind(this)
 	}
+	// getInitialState() {
+	// 　　return {}
+	// }
 	render() { 
 		return (
-			<input className="form-control" type={this.props.type} placeholder={this.props.placeholder} onChange={this.props.vauleChange.bind(this.props.name)}/>
+			<div className="form-row">
+				<input className="form-control" type={this.props.type} placeholder={this.props.placeholder} onChange={this._onChange} />
+			</div>
 		)
+	}
+	_onChange = (e) => {
+		this.props.valChange(e, this.props.name, e.target.value)
 	}
 }
 
-export default class home extends Component{
+class Home extends Component {
+	componentDidMount() {
+	}
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -25,16 +35,13 @@ export default class home extends Component{
 		}
 	}
 	render() {
-		const {username, password} = this.state
+		const { username, password } = this.state
+
 		return (
 			<Mainlayout>
 				<div style={{ width: '100%' }}>
-					<div className="form-row">
-						<Input type="text" value={username.val} placeholder="Username" vauleChange={this.onChange} />
-					</div>
-					<div className="form-row">
-						<Input type="password" value={password.val} placeholder="Password" vauleChange={this.onChange} />
-					</div>
+					<Input type="text" value={username.val} placeholder="Username" name="username" valChange={this.onChange} />
+					<Input type="password" value={password.val} placeholder="Password" name="password" valChange={this.onChange} />
 					<div className="form-row">
 						<button type="button" className="btn btn-danger" onClick={this.onLogin}>登 录</button>
 						<button type="button" className="btn btn-link">注 册</button>
@@ -43,11 +50,17 @@ export default class home extends Component{
 			</Mainlayout>
 		)
 	}
-	onChange = (e) => {
-		debugger
+	onChange = (e, n, v) => {
+		const { store } = this.context
+		this.state[n] = v
 	}
 	onLogin = () => {
-		const {username, password} = this.state
-		debugger
+		LoginSub(this.state, 'UTYPE_USER')
 	}
 }
+
+const mapStateToProps = (state) => state
+
+export default connect(mapStateToProps, {
+	LoginSub
+})(Home)
