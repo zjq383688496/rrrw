@@ -6,7 +6,7 @@ import Header from 'global/header'
 
 export const main = ({ children }) => (
 	<div className="_container">
-		<Header />
+		<Header title="Login" />
 		<div className="_content">
 			{children}
 		</div>

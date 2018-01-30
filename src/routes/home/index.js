@@ -38,7 +38,7 @@ class Home extends Component {
 		const { username, password } = this.state
 
 		return (
-			<Mainlayout>
+			<Mainlayout title="Login">
 				<div style={{ width: '100%' }}>
 					<Input type="text" value={username.val} placeholder="Username" name="username" valChange={this.onChange} />
 					<Input type="password" value={password.val} placeholder="Password" name="password" valChange={this.onChange} />
@@ -55,6 +55,7 @@ class Home extends Component {
 		this.state[n] = v
 	}
 	onLogin = () => {
+		debugger
 		LoginSub(this.state, 'UTYPE_USER')
 	}
 }
@@ -63,4 +64,5 @@ const mapStateToProps = (state) => state
 
 export default connect(mapStateToProps, {
 	LoginSub
-})(Home)
+}
+)(Home)

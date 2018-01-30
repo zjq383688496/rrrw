@@ -18,37 +18,15 @@ module.exports = merge(webpackBaseConf, {
 		new OpenBrowserPlugin({
 			url: `http://localhost:${PORT}`,
 		}),
-		// 开启HMR
+		// 开启 热更新
 		new webpack.HotModuleReplacementPlugin(),
 	],
-	devtool: 'source-map',
+	devtool: 'source-map', // 'eval-source-map'
 	devServer: {
 		contentBase: '../src/',
 		historyApiFallback: true,
 		hot: true,
-		// host: '0.0.0.0',
 		port: PORT,
 		stats: { colors: true }
 	},
-	// devServer: {
-	// 	historyApiFallback: true,
-	// 	port: PORT,
-	// 	compress: false,
-	// 	inline:   true,
-	// 	hot:      true,
-	// 	stats: {
-	// 		assets:     true,
-	// 		children:   false,
-	// 		chunks:     false,
-	// 		hash:       false,
-	// 		modules:    false,
-	// 		publicPath: false,
-	// 		timings:    true,
-	// 		version:    false,
-	// 		warnings:   true,
-	// 		colors: {
-	// 			green:  '\u001b[32m',
-	// 		}
-	// 	},
-	// }
 })

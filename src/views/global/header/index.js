@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './index.scss'
 
-export const Header = () => (
+export const Header = (props) => (
 	<header className="header">
-		<span>Login</span>
+		<span>{props.title || 'Title'}</span>
 	</header>
 )
 
