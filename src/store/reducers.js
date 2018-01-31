@@ -1,16 +1,38 @@
 import { combineReducers } from 'redux'
-import locationReducer from './location'
+// import { routerReducer } from 'react-router-redux'
+// import locationReducer from './location'
 
-export const makeRootReducer = (asyncReducers) => {
+import Reducers from 'Reducers'
+
+
+// ======================================================
+// 同步的 Reducers（即应用初始化所必需的）
+// ======================================================
+const syncReducers = {
+	// router: routerReducer,
+	...Reducers
+}
+
+/**
+ * @return {Function} rootReducer
+ */
+export const createRootReducer = (asyncReducers) => {
 	return combineReducers({
-		location: locationReducer,
+		// location: locationReducer,
+		...syncReducers,
 		...asyncReducers
 	})
 }
 
+/**
+ * 按需加载时，立即注入对应的 Reducer
+ * @param  {String}   key
+ * @param  {Function} reducer
+ */
 export const injectReducer = (store, { key, reducer }) => {
 	store.asyncReducers[key] = reducer
-	store.replaceReducer(makeRootReducer(store.asyncReducers))
+	// 替换当前的 rootReducer
+	store.replaceReducer(createRootReducer(store.asyncReducers))
 }
 
-export default makeRootReducer
+export default createRootReducer

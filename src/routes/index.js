@@ -9,13 +9,10 @@ import { Provider } from 'react-redux'
 // const history = createHashHistory()
 
 // Store
-import createStore from 'store/createStore'
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState)
+import store from 'store/createStore'
 
 // 手动监听更新，也可以将事件绑定到视图层。
 store.subscribe(() => console.log('store:', store.getState()))
-
 
 // 导入初始化渲染所需的模块
 import Home from './Home'

@@ -1,43 +1,38 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import makeRootReducer from './reducers'
+import createRootReducer from './reducers'
 
-export default (initialState = {}) => {
-	// ======================================================
-	// 中间件配置
-	// ======================================================
-	const middleware = [thunk]
+// ======================================================
+// 中间件配置
+// ======================================================
+const middleware = [thunk]
 
-	// ======================================================
-	// store增强
-	// ======================================================
-	const enhancers = []
-	if (__DEV__) {
-		const devToolsExtension = window.devToolsExtension
-		if (typeof devToolsExtension === 'function') {
-			enhancers.push(devToolsExtension())
-		}
+// ======================================================
+// Store 增强器
+// ======================================================
+const enhancers = []
+if (__DEV__) {
+	const devToolsExtension = window.devToolsExtension
+	if (typeof devToolsExtension === 'function') {
+		enhancers.push(devToolsExtension())
 	}
-
-	// ======================================================
-	// 状态实例化 & HMR 设置
-	// ======================================================
-	const store = createStore(
-		makeRootReducer(),
-		initialState,
-		compose(
-			applyMiddleware(...middleware),
-			...enhancers
-		)
-	)
-	store.asyncReducers = {}
-
-	if (module.hot) {
-		module.hot.accept('./reducers', () => {
-			const reducers = require('./reducers').default
-			store.replaceReducer(reducers(store.asyncReducers))
-		})
-	}
-
-	return store
 }
+
+// ======================================================
+// Store 实例化
+// ======================================================
+const store = createStore(
+	createRootReducer(),
+	window.__INITIAL_STATE__ || {},
+	compose(
+		applyMiddleware(...middleware),
+		...enhancers
+	)
+)
+
+// ======================================================
+// 异步加载的 Reducers（Code Splitting 按需加载的）
+// ======================================================
+store.asyncReducers = {}
+
+export default store

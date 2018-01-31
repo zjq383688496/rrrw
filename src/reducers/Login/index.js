@@ -7,7 +7,7 @@ let initState = {
 }
 
 export const LoginSub = (state = initState, action = {}) => {
-	debugger
+	// debugger
 	switch(action.type) {
 		case UTYPE_USER:
 			debugger
