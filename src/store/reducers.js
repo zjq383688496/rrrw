@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 // import { routerReducer } from 'react-router-redux'
 // import locationReducer from './location'
 
-import Reducers from 'Reducers'
+import Reducers from 'Reducers/index'
 
 
 // ======================================================
@@ -13,6 +13,8 @@ const syncReducers = {
 	...Reducers
 }
 
+console.log(syncReducers)
+// debugger
 /**
  * @return {Function} rootReducer
  */
