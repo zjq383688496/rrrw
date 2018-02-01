@@ -4,6 +4,11 @@ import Mainlayout from 'layout/main'
 import { LoginSub } from 'Actions/Login'
 import './index.scss'
 
+@connect( // 功能同 UTIL/createContainer
+	({ userData }) => ({ userData }),
+	require('Actions/Login').default
+)
+
 class Input extends Component{
 	constructor(props) {
 		super(props)
@@ -36,7 +41,10 @@ class Home extends Component {
 	}
 	render() {
 		const { username, password } = this.state
+		let { login } = this.props		// 通过 connect 获取
 
+		console.log(this.props)
+		debugger
 		return (
 			<Mainlayout title="Login">
 				<div style={{ width: '100%' }}>

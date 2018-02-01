@@ -4,7 +4,6 @@ import { combineReducers } from 'redux'
 
 import Reducers from 'Reducers/index'
 
-
 // ======================================================
 // 同步的 Reducers（即应用初始化所必需的）
 // ======================================================
@@ -13,8 +12,6 @@ const syncReducers = {
 	...Reducers
 }
 
-console.log(syncReducers)
-// debugger
 /**
  * @return {Function} rootReducer
  */
